@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+
+<head> 
+	
+<title>Sebastian's Health Risk Calculator</title>
+<div style="background-color:rgb(0, 233, 0)"></div> 
+
+</head>
+<style>
+
+</style>
+ 
+ 
+
+
+  
+  <br>
+  
+  <b>
+
+  <h3 style="text-align:center">
+  
+    <br>Sebastian's Health Risk Calculator</br> 
+   
+    
+    
+    <br>
+  
+  </h3> 
+  </b>
+  </br>
+  
+  <b>
+  <p>This will caluclate your risk of injury</p><p>Fill in the questions below</p>
+
+  
+  <label><b>1.Age</b></label><br>
+
+  <select id="q1">
+  <div class="c"><option value=""></option></div>
+  <option value="0">21 - 29</option>
+  <option value="10">30 - 44</option>
+  <option value="20">45 - 59</option>
+  <option value="30">60 and above</option>
+  
+  </select>
+  <br/>
+  <br/>
+  <label><b>2.Body Mass Index (BMI)</b></label><br>
+  <select id="q2">
+    <option value=""></option>
+    <option value="0">Less than 18.5</option>
+    <option value="0">18.5 - 24</option>
+    <option value="30">25 - 29</option>
+    <option value="70">30 and above</option>
+    
+  </select>
+  <br/>
+  <br/>
+  <label><b>3.Blood Pressure</b></label><br>
+
+  <select id="q3">
+    <option value=""></option>
+    <option value="0">< 120 / < 80</option>
+    <option value="15">120-129 / < 80</option>
+    <option value="30">130-139/80-89</option>
+    <option value="75">140/90 or higher</option>
+    </select>
+
+  <br/>
+  <br/>
+  <label><b>4.Family Disease</b></label><br>
+
+  <select id="q4">
+    <option value=""></option>
+    <option value="0">none</option>
+    <option value="10">Diabetes</option>
+    <option value="10">Cancer</option>
+    <option value="10">Alzheimer's</option>
+    
+  </select>
+
+  <br /><br />
+
+
+ <button onclick="RiskCalculator()">Calculate Risk</button>
+ 
+ 
+
+  <p id="Error"></p>
+  <p id="Risk"></p>
+
+<script>
+
+function RiskCalculator() {
+
+  document.getElementById("Error").innerHTML = "";
+  document.getElementById("Risk").innerHTML = "";
+
+    const STRONGEST_ANSWER = [
+      10, // question 1 Nornal
+      0, // question 2 normal
+      0, // question 3 normal
+      0, // question 4 normal
+      
+    ]
+    let question1Response = document.getElementById('q1').selectedOptions[0].value;
+    let question2Response = document.getElementById('q2').selectedOptions[0].value;
+    let question3Response = document.getElementById('q3').selectedOptions[0].value;
+    let question4Response = document.getElementById('q4').selectedOptions[0].value;
+    
+    if (question1Response == "") {
+      document.getElementById("Error").innerHTML = "Error!question 1 cannot be blank";
+      return;
+    }
+    if (question2Response == "") {
+      document.getElementById("Error").innerHTML = "Error!question 2 cannot be blank";
+      return;
+    }
+    if (question3Response == "") {
+      document.getElementById("Error").innerHTML = "Error!question 3 cannot be blank";
+      return;
+    }
+    if (question4Response == "") {
+      document.getElementById("Error").innerHTML = "Error!question 4 cannot be blank";
+      return;
+    }
+    
+print
+    let risk1 = Math.abs(question1Response-STRONGEST_ANSWER[0]);
+    let risk2 = Math.abs(question2Response-STRONGEST_ANSWER[1]);
+    let risk3 = Math.abs(question3Response-STRONGEST_ANSWER[2]);
+    let risk4 = Math.abs(question4Response-STRONGEST_ANSWER[3]);
+
+	   
+	  let totalScore = (risk1 + risk2 + risk3 + risk4);   
+    
+
+    let categories1 = "<b>You are low risk</b>"
+    let categories2 = "<b>You are Moderate risk</b>"
+    let categories3 = "<b>You are High risk</b>"
+    let categories4 = "<b>we cannot insure you</b>"
+    let useroutput = "<b>Your total score is: " + totalScore + ". </b>"
+
+    if (totalScore <= 20){
+      useroutput += categories1;
+    }
+      else if (totalScore > 21 && totalScore < 50){
+      useroutput +=categories2;
+    }    
+
+      else if (totalScore > 51 && totalScore < 75){
+      useroutput +=categories3;
+    }    
+      else {
+      useroutput +=categories4;
+    }
+    document.getElementById("Risk").innerHTML = useroutput;
+    
+
+}
+</script>
+
+
+</div>
+
+</body>
+</html>
